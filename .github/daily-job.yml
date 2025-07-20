@@ -1,0 +1,27 @@
+name: Daily C# Job
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Every 9am
+  workflow_dispatch:     # Manual start
+
+jobs:
+  build-and-run:
+    runs-on: windows-latest  # Или ubuntu-latest, если используете .NET Core
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'  # .net version
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Run
+      run: dotnet run --project YourProjectName --configuration Release --no-build

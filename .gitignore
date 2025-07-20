@@ -1,0 +1,14 @@
+# .NET build artifacts
+bin/
+obj/
+.vs/
+
+# IDE-specific
+.idea/
+*.user
+*.suo
+*.sln
+
+# Runtime-generated files
+*.swp
+*.log
