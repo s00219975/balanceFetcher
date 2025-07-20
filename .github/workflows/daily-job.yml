@@ -1,13 +1,13 @@
-name: Daily C# Job
+name: Daily Balance Check
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # Every 9am
-  workflow_dispatch:     # Manual start
+    - cron: '0 9 * * *'  # Каждый день в 9:00 UTC (12:00 МСК)
+  workflow_dispatch:     # Ручной запуск
 
 jobs:
   build-and-run:
-    runs-on: windows-latest  # Или ubuntu-latest, если используете .NET Core
+    runs-on: windows-latest  # Используем Windows (так как путь в стиле C:\...)
     
     steps:
     - uses: actions/checkout@v4
@@ -15,13 +15,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'  # .net version
+        dotnet-version: '8.0.x'
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./BalanceTest/BalanceTest.csproj
     
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ./BalanceTest/BalanceTest.csproj --configuration Release --no-restore
     
     - name: Run
-      run: dotnet run --project YourProjectName --configuration Release --no-build
+      run: dotnet run --project ./BalanceTest/BalanceTest.csproj --configuration Release --no-build
