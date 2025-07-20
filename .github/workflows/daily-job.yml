@@ -2,8 +2,8 @@ name: Daily Balance Check
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # Каждый день в 9:00 UTC (12:00 МСК)
-  workflow_dispatch:     # Ручной запуск
+    - cron: '*/5 * * * *'  # Каждые 5 минут
+  workflow_dispatch:       # Ручной запуск
 
 jobs:
   build-and-run:
