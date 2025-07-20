@@ -7,11 +7,18 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: windows-latest  # Используем Windows (так как путь в стиле C:\...)
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v4
     
+    # Шаг для отладки времени (отдельный step)
+    - name: Debug schedule
+      run: |
+        echo "Current time UTC: $(date -u)"
+        echo "Time zone: ${{ runner.timezone }}"
+    
+    # Установка .NET (отдельный step)
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
